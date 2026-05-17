@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000; min-height: 16.0px}
+    span.s1 {font-kerning: none}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;Stylair — AI Fashion Styling App&lt;/title&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>*{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin:0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-sizing:border-box;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family:'Inter',sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#0b0b0f;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>overflow-x:hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>line-height:1.6;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>a{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-decoration:none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:inherit;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.container{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width:90%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width:1200px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin:auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>header{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:24px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>position:sticky;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>top:0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>backdrop-filter:blur(12px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:rgba(11,11,15,0.75);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>z-index:100;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-bottom:1px solid rgba(255,255,255,0.05);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>nav{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>justify-content:space-between;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>align-items:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.logo{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:1.5rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight:700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>letter-spacing:-1px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.logo span{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#ff5ca8;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hero{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:100px 0 80px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>position:relative;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.badge{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:inline-block;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:10px 18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:999px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:rgba(255,92,168,0.12);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#ff8cc4;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:0.9rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,92,168,0.2);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>h1{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:4rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>line-height:1.05;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width:900px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin:auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight:800;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>letter-spacing:-2px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.gradient{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(90deg,#ff5ca8,#9f7aea,#5ad7ff);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>-webkit-background-clip:text;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>-webkit-text-fill-color:transparent;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.subtitle{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top:28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#b3b3c5;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width:700px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-left:auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-right:auto;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.waitlist{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top:42px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>justify-content:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>gap:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>flex-wrap:wrap;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.waitlist input{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width:320px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:16px 18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#16161d;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>outline:none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,255,255,0.08);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.waitlist button{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:16px 28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:none;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(135deg,#ff5ca8,#9f7aea);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:white;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight:600;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>cursor:pointer;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transition:0.25s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.waitlist button:hover{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transform:translateY(-2px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>opacity:0.95;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hero-image{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top:70px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:flex;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>justify-content:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>gap:28px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>flex-wrap:wrap;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.phone{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width:250px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>height:520px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:36px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(180deg,#1d1d26,#121218);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,255,255,0.08);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-shadow:0 20px 60px rgba(0,0,0,0.45);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>overflow:hidden;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>position:relative;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.phone::before{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>content:"";</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>position:absolute;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>top:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>left:50%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transform:translateX(-50%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width:90px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>height:18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#0b0b0f;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.screen{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:70px 20px 20px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>height:100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>radial-gradient(circle at top right,#ff5ca822,transparent 35%),</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>radial-gradient(circle at bottom left,#5ad7ff22,transparent 35%);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.mock-card{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:rgba(255,255,255,0.05);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:16px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,255,255,0.06);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.mock-image{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>height:180px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:14px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(135deg,#ff5ca8,#9f7aea,#5ad7ff);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.features{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:120px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.section-title{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:2.6rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:70px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight:700;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.feature-grid{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:grid;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>grid-template-columns:repeat(auto-fit,minmax(260px,1fr));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>gap:24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.feature{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#14141b;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:24px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,255,255,0.06);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transition:0.25s;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.feature:hover{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>transform:translateY(-6px);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-color:rgba(255,92,168,0.3);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.feature-icon{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:18px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.feature h3{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:12px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:1.2rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.feature p{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#b3b3c5;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.cta{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:120px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.cta-box{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(135deg,#16161f,#1c1c28);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:70px 40px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:32px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,255,255,0.06);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>footer{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:50px 0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#8e8ea0;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-top:1px solid rgba(255,255,255,0.05);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>@media(max-width:768px){</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>h1{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-size:2.7rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.subtitle{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>font-size:1rem;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.hero{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>padding-top:70px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.phone{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>width:100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>max-width:290px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.waitlist{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>flex-direction:column;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>align-items:center;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.waitlist input,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>.waitlist button{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>width:100%;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>max-width:360px;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;body&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;header&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;nav&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="logo"&gt;styl&lt;span&gt;air&lt;/span&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/header&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section class="hero"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="badge"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Coming Soon on iPhone</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Your AI-Powered</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;span class="gradient"&gt;Fashion Stylist&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/h1&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="subtitle"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Discover outfits, organize your wardrobe, and get personalized styling recommendations powered by AI.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Fashion inspiration tailored uniquely to you.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;form class="waitlist"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;input type="email" placeholder="Enter your email" required /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;button type="submit"&gt;Join Waitlist&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/form&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="hero-image"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phone"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="screen"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="mock-card"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="mock-image"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;AI Outfit Match&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p style="font-size:0.9rem;color:#bbb;margin-top:6px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>Smart recommendations based on your wardrobe.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phone"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="screen"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="mock-card"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="mock-image"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Closet Organizer&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p style="font-size:0.9rem;color:#bbb;margin-top:6px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>Digitize and organize your fashion collection.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="phone"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="screen"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;div class="mock-card"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="mock-image"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;strong&gt;Daily Style Feed&lt;/strong&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;p style="font-size:0.9rem;color:#bbb;margin-top:6px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">              </span>Fresh AI-curated outfit inspiration every day.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section class="features"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2 class="section-title"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Why You'll Love Stylair</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="feature-grid"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="feature-icon"&gt;✨&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;AI Styling Assistant&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>Receive personalized outfit recommendations based on your style preferences and trends.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="feature-icon"&gt;👗&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Digital Wardrobe&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>Upload and organize your clothing collection in one beautiful app.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="feature-icon"&gt;📸&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Smart Outfit Generator&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>Generate stunning outfit combinations instantly with AI-powered matching.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="feature"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="feature-icon"&gt;🔥&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Trend Discovery&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>Stay ahead with curated trends, fashion inspiration, and style insights.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;section class="cta"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="cta-box"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2 style="font-size:2.5rem;margin-bottom:18px;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Be First to Experience Stylair</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/h2&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p style="color:#b3b3c5;margin-bottom:30px;font-size:1.1rem;"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Join the waitlist and get early access when we launch.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;form class="waitlist"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;input type="email" placeholder="Your email address" required /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;button type="submit"&gt;Get Early Access&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/form&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;footer&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>© 2026 Stylair. All rights reserved.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/footer&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+</body>
+</html>
