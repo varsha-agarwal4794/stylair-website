@@ -330,23 +330,45 @@
 <p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Fashion inspiration tailored uniquely to you.</span></p>
 <p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/p&gt;</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;form<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>class="waitlist"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>action="https://tally.so/r/VLbVvj"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>method="POST"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>target="_blank"</span></p>
-<p class="p1"><span class="s1">&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;input<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>type="email"<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>name="email"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>placeholder="Enter your email"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>required</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>/&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="waitlist-embed"&gt;</span></p>
 <p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;button type="submit"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>Join Waitlist</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/form&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;iframe</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>data-tally-src="https://tally.so/r/VLbVvj?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>loading="lazy"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>width="100%"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>height="220"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>frameborder="0"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>marginheight="0"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>marginwidth="0"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>title="Join Stylair Waitlist"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/iframe&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1">&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>var d = document,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>w = "https://tally.so/widgets/embed.js",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>v = function() {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (typeof Tally !== "undefined") {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>Tally.loadEmbeds();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>e.src = e.dataset.tallySrc;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>if (typeof Tally !== "undefined") {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>v();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>} else if (d.querySelector('script[src="' + w + '"]') == null) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>var s = d.createElement("script");</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>s.src = w;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>s.onload = v;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>s.onerror = v;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>d.body.appendChild(s);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>}</span></p>
+<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p2"><span class="s1"></span><br></p>
 <p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="hero-image"&gt;</span></p>
