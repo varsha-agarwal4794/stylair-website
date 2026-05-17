@@ -1,272 +1,973 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Courier; -webkit-text-stroke: #000000; min-height: 16.0px}
-    span.s1 {font-kerning: none}
-    span.s2 {font: 13.0px 'Apple Color Emoji'; font-kerning: none}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stylair — AI Wardrobe Stylist</title>
+<meta name="description" content="Stylair uses AI to catalog your wardrobe and suggest perfect outfits based on your mood, occasion, and the weather. Coming soon to iOS.">
+<meta property="og:title" content="Stylair — AI Wardrobe Stylist">
+<meta property="og:description" content="Your AI personal stylist. Catalog your clothes, describe your mood, get the perfect outfit.">
+<meta property="og:url" content="https://stylair.app">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --charcoal: #1C1C1E;
+    --off-white: #FAFAF8;
+    --terra: #C4714A;
+    --terra-light: #E8C4B0;
+    --sage: #7A9E7E;
+    --linen: #E8E4DC;
+    --linen-dark: #D4CFC5;
+    --muted: #8A8880;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--off-white);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(250, 250, 248, 0.85);
+    border-bottom: 0.5px solid var(--linen);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--terra); }
+
+  .nav-cta {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    background: var(--charcoal);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--terra); transform: scale(1.02); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 113, 74, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { max-width: 560px; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.1s;
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    background: var(--terra);
+    border-radius: 50%;
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.25s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  .hero-form {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 420px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+
+  .hero-input {
+    flex: 1;
+    padding: 0.85rem 1.2rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    background: white;
+    border: 0.5px solid var(--linen-dark);
+    border-radius: 100px;
+    outline: none;
+    color: var(--charcoal);
+    transition: border-color 0.2s;
+  }
+
+  .hero-input::placeholder { color: var(--muted); }
+  .hero-input:focus { border-color: var(--terra); }
+
+  .hero-btn {
+    padding: 0.85rem 1.6rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--terra);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .hero-btn:hover { background: #b06040; transform: scale(1.02); }
+
+  .hero-note {
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.7s;
+  }
+
+  /* ─── PHONE MOCKUP ─── */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.5s;
+  }
+
+  .phone-wrap {
+    position: relative;
+    width: 280px;
+  }
+
+  .phone-frame {
+    width: 280px;
+    height: 580px;
+    background: var(--charcoal);
+    border-radius: 44px;
+    padding: 14px;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(28,28,30,0.25), 0 0 0 0.5px rgba(28,28,30,0.3);
+  }
+
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    background: var(--off-white);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 28px;
+    background: var(--charcoal);
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+  }
+
+  .screen-content {
+    padding: 48px 16px 16px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .screen-greeting {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 2px;
+  }
+
+  .screen-sub {
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .weather-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--linen);
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    width: fit-content;
+  }
+
+  .prompt-box {
+    background: white;
+    border: 0.5px solid var(--linen-dark);
+    border-radius: 14px;
+    padding: 10px 12px;
+    font-size: 0.65rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .prompt-box strong {
+    display: block;
+    color: var(--charcoal);
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 2px;
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .outfit-card {
+    background: white;
+    border: 0.5px solid var(--linen-dark);
+    border-radius: 16px;
+    padding: 12px;
+    flex: 1;
+  }
+
+  .outfit-card-label {
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 6px;
+  }
+
+  .outfit-card-name {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+
+  .outfit-items {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .outfit-item {
+    width: 48px;
+    height: 60px;
+    border-radius: 10px;
+    background: var(--linen);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    position: relative;
+  }
+
+  .outfit-item-add {
+    background: transparent;
+    border: 0.5px dashed var(--linen-dark);
+    font-size: 0.9rem;
+    color: var(--linen-dark);
+  }
+
+  .outfit-rationale {
+    font-size: 0.58rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .screen-badge {
+    position: absolute;
+    top: 70px;
+    right: -16px;
+    background: var(--terra);
+    color: white;
+    font-size: 0.55rem;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(196,113,74,0.35);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .screen-badge-2 {
+    position: absolute;
+    bottom: 100px;
+    left: -24px;
+    background: white;
+    color: var(--charcoal);
+    font-size: 0.55rem;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+    box-shadow: 0 4px 16px rgba(28,28,30,0.12);
+    border: 0.5px solid var(--linen-dark);
+    animation: float 3s ease-in-out infinite 1.5s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ─── SOCIAL PROOF ─── */
+  .social-proof {
+    padding: 3rem;
+    background: var(--linen);
+    border-top: 0.5px solid var(--linen-dark);
+    border-bottom: 0.5px solid var(--linen-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .proof-stat {
+    text-align: center;
+  }
+
+  .proof-number {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--charcoal);
+    display: block;
+  }
+
+  .proof-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .proof-divider {
+    width: 0.5px;
+    height: 40px;
+    background: var(--linen-dark);
+  }
+
+  /* ─── HOW IT WORKS ─── */
+  .section {
+    padding: 6rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+    max-width: 500px;
+    margin-bottom: 4rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--terra);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+
+  .step-number {
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--linen-dark);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    margin-bottom: 0.6rem;
+  }
+
+  .step-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .step-line {
+    width: 32px;
+    height: 0.5px;
+    background: var(--terra);
+    margin-bottom: 1.2rem;
+  }
+
+  /* ─── FEATURES ─── */
+  .features-section {
+    background: var(--charcoal);
+    padding: 6rem 3rem;
+  }
+
+  .features-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features-section .section-eyebrow { color: var(--terra-light); }
+
+  .features-section .section-title { color: var(--off-white); max-width: 600px; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .feature-item {
+    padding: 2rem;
+    background: var(--charcoal);
+    transition: background 0.2s;
+  }
+
+  .feature-item:hover { background: #252527; }
+
+  .feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .feature-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--off-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(250,250,248,0.45);
+    font-weight: 300;
+  }
+
+  /* ─── TESTIMONIALS / QUOTE ─── */
+  .quote-section {
+    padding: 6rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .big-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--charcoal);
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-attr {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .quote-divider {
+    width: 40px;
+    height: 0.5px;
+    background: var(--terra);
+    margin: 1rem auto;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    background: var(--linen);
+    padding: 6rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'Stylair';
+    position: absolute;
+    font-family: var(--serif);
+    font-size: 20vw;
+    font-weight: 300;
+    color: rgba(28,28,30,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: -0.04em;
+  }
+
+  .cta-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--charcoal);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-title em { font-style: italic; color: var(--terra); }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 0.5px solid var(--linen-dark);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--terra); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--charcoal); }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ─── SUCCESS STATE ─── */
+  .success-msg {
+    display: none;
+    color: var(--sage);
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    font-weight: 400;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; text-align: center; gap: 3rem; }
+    .hero-sub { margin: 0 auto 2.5rem; }
+    .hero-form { margin: 0 auto; }
+    .hero-visual { order: -1; }
+    .phone-frame { width: 220px; height: 450px; }
+    .steps { grid-template-columns: 1fr; gap: 2rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .section { padding: 4rem 1.5rem; }
+    .features-section { padding: 4rem 1.5rem; }
+    .social-proof { gap: 2rem; padding: 2rem 1.5rem; }
+    .proof-divider { display: none; }
+    footer { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+    .screen-badge, .screen-badge-2 { display: none; }
+    .cta-section { padding: 4rem 1.5rem; }
+  }
+</style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;Stylair — AI Fashion Styling App&lt;/title&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>*{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin:0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>box-sizing:border-box;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>body{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-family:'Inter',sans-serif;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#0b0b0f;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:white;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>overflow-x:hidden;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>line-height:1.6;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.container{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>width:90%;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width:1200px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin:auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>header{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:24px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>position:sticky;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>top:0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>backdrop-filter:blur(12px);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:rgba(11,11,15,0.75);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-bottom:1px solid rgba(255,255,255,0.05);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>nav{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:flex;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>justify-content:space-between;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>align-items:center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.logo{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:1.5rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight:700;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.logo span{ color:#ff5ca8; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.hero{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:100px 0 60px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.badge{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:inline-block;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:10px 18px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:999px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:rgba(255,92,168,0.12);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#ff8cc4;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:24px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,92,168,0.2);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>h1{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:4rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-weight:800;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>line-height:1.1;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.gradient{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(90deg,#ff5ca8,#9f7aea,#5ad7ff);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>-webkit-background-clip:text;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>-webkit-text-fill-color:transparent;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.subtitle{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top:20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#b3b3c5;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width:700px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-left:auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-right:auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.waitlist-embed{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-top:40px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>max-width:600px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-left:auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-right:auto;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:18px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>overflow:hidden;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#14141b;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:10px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.features{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:100px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.section-title{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>font-size:2.5rem;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>margin-bottom:60px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.grid{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>display:grid;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>grid-template-columns:repeat(auto-fit,minmax(250px,1fr));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>gap:24px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.card{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:#14141b;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:30px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:20px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border:1px solid rgba(255,255,255,0.06);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.card h3{ margin-bottom:10px; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.card p{ color:#b3b3c5; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.cta{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:100px 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>.cta-box{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>background:linear-gradient(135deg,#16161f,#1c1c28);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:60px 30px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-radius:30px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>footer{</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>text-align:center;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>padding:40px;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>color:#777;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>border-top:1px solid rgba(255,255,255,0.05);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;header&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;nav&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="logo"&gt;styl&lt;span&gt;air&lt;/span&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;section class="hero"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="badge"&gt;Coming Soon on iPhone&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Your AI-Powered &lt;span class="gradient"&gt;Fashion Stylist&lt;/span&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/h1&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;p class="subtitle"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>Discover outfits, organize your wardrobe, and get personalized AI styling recommendations.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- </span><span class="s2">✅</span><span class="s1"> TALLY EMBED (WAITLIST) --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="waitlist-embed"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;iframe</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>data-tally-src="https://tally.so/embed/VLbVvj?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>loading="lazy"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>width="100%"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>height="220"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>frameborder="0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/iframe&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;section class="features"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;h2 class="section-title"&gt;Why Stylair&lt;/h2&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="grid"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="card"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;AI Styling&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Personal outfit recommendations based on your wardrobe.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="card"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Digital Closet&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Organize and manage your entire wardrobe in one place.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="card"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Outfit Generator&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Instantly create stylish outfit combinations with AI.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="card"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Trends&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;p&gt;Stay ahead with curated fashion inspiration.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;section class="cta"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="cta-box"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Be First to Try Stylair&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;p style="color:#b3b3c5;margin:20px 0;"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Join the waitlist for early access.</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/p&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;!-- SAME TALLY FORM AGAIN --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;div class="waitlist-embed"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;iframe</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>data-tally-src="https://tally.so/embed/VLbVvj?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>loading="lazy"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>width="100%"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>height="220"</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>frameborder="0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/iframe&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/section&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;footer&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>© 2026 Stylair. All rights reserved.</span></p>
-<p class="p1"><span class="s1">&lt;/footer&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;!-- TALLY SCRIPT --&gt;</span></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>var d=document,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>s=d.createElement("script");</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>s.src="https://tally.so/widgets/embed.js";</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>s.onload=function(){Tally.loadEmbeds();};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>d.body.appendChild(s);</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Styl<span>air</span></a>
+  <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Coming soon to iOS
+    </div>
+    <h1 class="hero-title">
+      Dress the way<br>you <em>feel,</em><br>every day.
+    </h1>
+    <p class="hero-sub">
+      Stylair catalogs your wardrobe with AI, then suggests perfect outfits based on your mood, occasion, and the weather — using clothes you already own.
+    </p>
+    <form class="hero-form" id="hero-form" onsubmit="handleSubmit(event, 'hero-success')">
+      <input type="email" class="hero-input" placeholder="your@email.com" required>
+      <button type="submit" class="hero-btn">Notify me</button>
+    </form>
+    <p class="hero-note">No spam. Just a ping when Stylair launches. 🤍</p>
+    <p class="success-msg" id="hero-success">✓ You're on the list! We'll be in touch soon.</p>
+  </div>
+
+  <div class="hero-visual">
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="screen-content">
+            <div>
+              <p class="screen-greeting">Good morning ✦</p>
+              <p class="screen-sub">What's your vibe today?</p>
+            </div>
+            <div class="weather-chip">☀️ 18°C · Seattle · Perfect layers day</div>
+            <div class="prompt-box">
+              <strong>Your prompt</strong>
+              "Casual coffee run, want to look effortlessly put together"
+            </div>
+            <div class="outfit-card">
+              <p class="outfit-card-label">✦ Best match</p>
+              <p class="outfit-card-name">The Easy Sunday</p>
+              <div class="outfit-items">
+                <div class="outfit-item">👕</div>
+                <div class="outfit-item">👖</div>
+                <div class="outfit-item">👟</div>
+                <div class="outfit-item outfit-item-add">+</div>
+              </div>
+              <p class="outfit-rationale">Neutral tones with a relaxed fit — this works perfectly for your 18° morning. The white tee anchors the look.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="screen-badge">✦ AI-powered styling</div>
+      <div class="screen-badge-2">📍 Weather-aware outfits</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF BAR -->
+<div class="social-proof reveal">
+  <div class="proof-stat">
+    <span class="proof-number">3 sec</span>
+    <span class="proof-label">to add a clothing item</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <span class="proof-number">Claude AI</span>
+    <span class="proof-label">world's best styling brain</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <span class="proof-number">100%</span>
+    <span class="proof-label">your own wardrobe</span>
+  </div>
+  <div class="proof-divider"></div>
+  <div class="proof-stat">
+    <span class="proof-number">Free</span>
+    <span class="proof-label">to download on iOS</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <span class="section-eyebrow reveal">How it works</span>
+  <h2 class="section-title reveal">Three steps to <em>effortless</em> style.</h2>
+  <div class="steps">
+    <div class="reveal">
+      <div class="step-number">01</div>
+      <div class="step-line"></div>
+      <h3 class="step-title">Photograph your clothes</h3>
+      <p class="step-desc">Snap a photo of each item. Stylair's AI instantly removes the background, identifies the category, color, and style — and catalogs it automatically. No manual tagging needed.</p>
+    </div>
+    <div class="reveal">
+      <div class="step-number">02</div>
+      <div class="step-line"></div>
+      <h3 class="step-title">Describe your mood</h3>
+      <p class="step-desc">Type how you want to feel — "date night, effortlessly cool" or "first day at a new job." Stylair understands natural language and considers today's weather automatically.</p>
+    </div>
+    <div class="reveal">
+      <div class="step-number">03</div>
+      <div class="step-line"></div>
+      <h3 class="step-title">Wear with confidence</h3>
+      <p class="step-desc">Get three curated outfit suggestions from your actual wardrobe — with an explanation of why each look works. Save favourites, plan ahead, and never open your wardrobe unsure again.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <div class="features-inner">
+    <span class="section-eyebrow reveal">Everything you need</span>
+    <h2 class="section-title reveal">Built for how <em>real people</em> actually dress.</h2>
+    <div class="features-grid reveal">
+      <div class="feature-item">
+        <span class="feature-icon">🌤</span>
+        <h3 class="feature-title">Weather-aware outfits</h3>
+        <p class="feature-desc">Stylair checks your local forecast and ensures every suggestion is appropriate for the temperature and conditions outside.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🎨</span>
+        <h3 class="feature-title">Personal color analysis</h3>
+        <p class="feature-desc">Take a selfie and discover your seasonal color palette. Stylair flags wardrobe items that don't flatter your natural coloring.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">🧳</span>
+        <h3 class="feature-title">Trip packing lists</h3>
+        <p class="feature-desc">Tell Stylair your destination and trip length. It generates an optimal packing list that creates the most outfits from the fewest pieces.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📸</span>
+        <h3 class="feature-title">Outfit photo feedback</h3>
+        <p class="feature-desc">Snap a mirror selfie and get instant stylist critique — fit, proportions, color harmony, and one actionable improvement suggestion.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">📅</span>
+        <h3 class="feature-title">Outfit calendar planner</h3>
+        <p class="feature-desc">Plan your outfits a week ahead. Avoid repeating the same look at the same event. Never scramble in the morning again.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon">💸</span>
+        <h3 class="feature-title">Cost-per-wear tracker</h3>
+        <p class="feature-desc">Log what you wear and watch your cost-per-wear drop over time. Discover which pieces are your best value investments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section reveal">
+  <p class="big-quote">"The average person spends 17 minutes deciding what to wear each morning. That's over 100 hours a year — standing in front of an open wardrobe."</p>
+  <div class="quote-divider"></div>
+  <p class="quote-attr">Stylair gives those hours back.</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section" id="waitlist">
+  <h2 class="cta-title reveal">Join the <em>waitlist.</em></h2>
+  <p class="cta-sub reveal">Be first to know when Stylair launches on iOS.</p>
+  <form class="cta-form reveal" id="cta-form" onsubmit="handleSubmit(event, 'cta-success')">
+    <input type="email" class="hero-input" placeholder="your@email.com" required>
+    <button type="submit" class="hero-btn">Notify me</button>
+  </form>
+  <p class="success-msg" id="cta-success" style="position:relative">✓ You're on the list! We'll be in touch soon.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Styl<span>air</span></a>
+  <ul class="footer-links">
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="https://instagram.com/stylair" target="_blank">Instagram</a></li>
+    <li><a href="https://tiktok.com/@stylair" target="_blank">TikTok</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Stylair. All rights reserved.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  async function handleSubmit(e, successId) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const email = form.querySelector('input[type="email"]').value;
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      await fetch('https://tally.so/r/VLbVvj', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ email }),
+        mode: 'no-cors'
+      });
+    } catch (_) {}
+
+    form.style.display = 'none';
+    const msg = document.getElementById(successId);
+    if (msg) { msg.style.display = 'block'; }
+  }
+</script>
 </body>
 </html>
