@@ -1068,23 +1068,25 @@
     const form = e.target;
     const email = form.querySelector('input[type="email"]').value;
 
-    // Open the real Tally form as a modal popup so submissions land in the dashboard.
-    // Falls back to a new tab if the embed script hasn't loaded yet.
+    const showSuccess = () => {
+      form.style.display = 'none';
+      const msg = document.getElementById(successId);
+      if (msg) msg.style.display = 'block';
+    };
+
     if (window.Tally) {
       Tally.openPopup('VLbVvj', {
         layout: 'modal',
         width: 420,
         overlay: true,
-        emoji: { text: '✦', animation: 'none' },
         hiddenFields: { email },
+        onSubmit: showSuccess,
       });
     } else {
+      // Fallback: open in new tab and show success on our page
       window.open('https://tally.so/r/VLbVvj', '_blank');
+      showSuccess();
     }
-
-    form.style.display = 'none';
-    const msg = document.getElementById(successId);
-    if (msg) { msg.style.display = 'block'; }
   }
 </script>
 </body>
